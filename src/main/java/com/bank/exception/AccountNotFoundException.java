@@ -1,6 +1,9 @@
 package com.bank.exception;
 
-public class AccountNotFoundException extends Exception {
+/**
+ * Исключение, выбрасываемое, когда запрашиваемый банковский счет не найден в системе.
+ */
+public class AccountNotFoundException extends BankException {
     public AccountNotFoundException(String message) {
         super(message);
     }

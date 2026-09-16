@@ -2,6 +2,9 @@ package com.bank.model;
 
 import com.bank.exception.AccountClosedException;
 
+/**
+ * Класс, представляющий депозитный накопительный счет.
+ */
 public class DepositAccount implements Account {
     private final String id;
     private double balance;

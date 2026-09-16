@@ -2,6 +2,9 @@ package com.bank.model;
 
 import com.bank.exception.AccountClosedException;
 
+/**
+ * Интерфейс, представляющий базовый банковский счет.
+ */
 public interface Account {
     String getId();
     double getBalance();

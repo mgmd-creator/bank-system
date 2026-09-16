@@ -3,7 +3,10 @@ package com.bank.model;
 import com.bank.exception.AccountClosedException;
 import com.bank.exception.InsufficientFundsException;
 
-public class CreditAccount implements WithdrawableAccount {
+/**
+ * Класс, представляющий кредитный банковский счет.
+ */
+public class CreditAccount implements Account, WithdrawableAccount {
     private final String id;
     private double balance;
     private final double creditLimit;
