@@ -26,7 +26,8 @@ class BankServiceTest {
     @Test
     void testDebitAccountInsufficientFunds() {
         bankService.createDebitAccount("DEB-2", 500.0);
-        InsufficientFundsException insufficientFundsException = assertThrows(InsufficientFundsException.class, () -> {
+
+        assertThrows(InsufficientFundsException.class, () -> {
             bankService.withdraw("DEB-2", 1000.0);
         });
     }
