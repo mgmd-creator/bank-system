@@ -3,6 +3,7 @@ package com.bank.service;
 import com.bank.exception.InsufficientFundsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,8 +28,11 @@ class BankServiceTest {
     void testDebitAccountInsufficientFunds() {
         bankService.createDebitAccount("DEB-2", 500.0);
 
-        assertThrows(InsufficientFundsException.class, () -> {
-            bankService.withdraw("DEB-2", 1000.0);
+        assertThrows(InsufficientFundsException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                bankService.withdraw("DEB-2", 1000.0);
+            }
         });
     }
 
