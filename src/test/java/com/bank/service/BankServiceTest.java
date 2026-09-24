@@ -13,7 +13,6 @@ class BankServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Создаем чистый сервис перед каждым тестом
         bankService = new BankService();
     }
 
