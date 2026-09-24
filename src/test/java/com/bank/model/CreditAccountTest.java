@@ -12,7 +12,7 @@ class CreditAccountTest {
     void testWithdrawWithinCreditLimit() throws Exception {
         CreditAccount account = new CreditAccount("1", 100.0, 500.0);
         account.withdraw(400.0);
-        assertEquals(100.0, account.getBalance(), 0.001);
+        assertEquals(-300.0, account.getBalance(), 0.001);
     }
 
     @Test

@@ -1,68 +1,45 @@
 package com.bank.service;
 
 import com.bank.exception.AccountClosedException;
-import com.bank.exception.AccountNotFoundException;
 import com.bank.exception.InsufficientFundsException;
-import com.bank.model.Account;
-import com.bank.model.WithdrawableAccount;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class BankServiceTest {
-    private final Map<String, Account> accounts = new HashMap<>();
+class BankServiceTest {
 
-    public void addAccount(Account account) {
-        if (account == null) {
-            throw new IllegalArgumentException("Счет не может быть null");
-        }
-        if (accounts.containsKey(account.getId())) {
-            throw new IllegalArgumentException("Счет с таким ID уже существует: " + account.getId());
-        }
-        accounts.put(account.getId(), account);
+    private BankService bankService;
+
+    @BeforeEach
+    void setUp() {
+        // Создаем чистый сервис перед каждым тестом
+        bankService = new BankService();
     }
 
-    public Account getAccount(String id) throws AccountNotFoundException {
-        Account account = accounts.get(id);
-        if (account == null) {
-            throw new AccountNotFoundException("Счет не найден: " + id);
-        }
-        return account;
+    @Test
+    void testCreateAndDepositDebitAccount() throws Exception {
+        bankService.createDebitAccount("DEB-1", 1000.0);
+        bankService.deposit("DEB-1", 500.0);
+        assertEquals(1500.0, bankService.findAccount("DEB-1").getBalance(), 0.001);
     }
 
-    public void deposit(String accountId, double amount)
-            throws AccountNotFoundException, AccountClosedException {
-        Account account = getAccount(accountId);
-        account.deposit(amount);
+    @Test
+    void testDebitAccountInsufficientFunds() {
+        bankService.createDebitAccount("DEB-2", 500.0);
+        assertThrows(InsufficientFundsException.class, () -> {
+            bankService.withdraw("DEB-2", 1000.0);
+        });
     }
 
-    public void withdraw(String accountId, double amount)
-            throws AccountNotFoundException, InsufficientFundsException, AccountClosedException {
-        Account account = getAccount(accountId);
+    @Test
+    void testSuccessfulTransfer() throws Exception {
+        bankService.createDebitAccount("DEB-FROM", 2000.0);
+        bankService.createDebitAccount("DEB-TO", 500.0);
 
-        if (!(account instanceof WithdrawableAccount)) {
-            throw new IllegalArgumentException("С данного типа счета нельзя снимать средства напрямую");
-        }
+        bankService.transfer("DEB-FROM", "DEB-TO", 1000.0);
 
-        ((WithdrawableAccount) account).withdraw(amount);
-    }
-
-    public void transfer(String fromId, String toId, double amount)
-            throws AccountNotFoundException, InsufficientFundsException, AccountClosedException {
-        Account fromAccount = getAccount(fromId);
-        Account toAccount = getAccount(toId);
-
-        if (!(fromAccount instanceof WithdrawableAccount)) {
-            throw new IllegalArgumentException("Счет списания не поддерживает снятие средств");
-        }
-
-        ((WithdrawableAccount) fromAccount).withdraw(amount);
-        toAccount.deposit(amount);
-    }
-
-    public void closeAccount(String accountId)
-            throws AccountNotFoundException, AccountClosedException {
-        Account account = getAccount(accountId);
-        account.close();
+        assertEquals(1000.0, bankService.findAccount("DEB-FROM").getBalance(), 0.001);
+        assertEquals(1500.0, bankService.findAccount("DEB-TO").getBalance(), 0.001);
     }
 }
