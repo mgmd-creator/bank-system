@@ -3,10 +3,7 @@ package com.bank.service;
 import com.bank.exception.AccountClosedException;
 import com.bank.exception.AccountNotFoundException;
 import com.bank.exception.BankException;
-import com.bank.model.Account;
-import com.bank.model.CreditAccount;
-import com.bank.model.DebitAccount;
-import com.bank.model.WithdrawableAccount;
+import com.bank.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +26,11 @@ public class BankService {
 
     public void createCreditAccount(String id, double balance, double limit) {
         CreditAccount account = new CreditAccount(id, balance, limit);
+        addAccount(account);
+    }
+
+    public void createDepositAccount(String id, double balance) {
+        DepositAccount account = new DepositAccount(id, balance);
         addAccount(account);
     }
 
