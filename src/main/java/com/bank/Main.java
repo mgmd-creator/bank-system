@@ -53,7 +53,7 @@ public class Main {
                         String id = scanner.next();
                         System.out.print("Введите начальный баланс: ");
                         double balance = scanner.nextDouble();
-                        bankService.createDepositAccount(id, balance); // Теперь создается именно DepositAccount!
+                        bankService.createDepositAccount(id, balance);
                         System.out.println("Депозитный счет успешно создан!");
                         break;
                     }
