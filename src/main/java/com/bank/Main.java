@@ -20,6 +20,7 @@ public class Main {
             System.out.println("5. Снять средства");
             System.out.println("6. Перевести средства между счетами");
             System.out.println("7. Проверить баланс счета");
+            System.out.println("8. Показать список всех счетов");
             System.out.println("0. Выход");
             System.out.print("Выберите пункт меню: ");
 
@@ -90,6 +91,21 @@ public class Main {
                         String id = scanner.next();
                         Account acc = bankService.findAccount(id);
                         System.out.println("Баланс: " + acc.getBalance() + " (Активен: " + acc.isActive() + ")");
+                        break;
+                    }
+                    case 8: {
+                        java.util.List<Account> allAccounts = bankService.getAllAccounts();
+                        if (allAccounts.isEmpty()) {
+                            System.out.println("В банке пока нет открытых счетов.");
+                        } else {
+                            System.out.println("\n=== СПИСОК ВСЕХ СЧЕТОВ ===");
+                            for (Account acc : allAccounts) {
+                                System.out.println("ID: " + acc.getId() +
+                                        ", Баланс: " + acc.getBalance() +
+                                        ", Активен: " + acc.isActive() +
+                                        ", Тип: " + acc.getClass().getSimpleName());
+                            }
+                        }
                         break;
                     }
                     case 0: {

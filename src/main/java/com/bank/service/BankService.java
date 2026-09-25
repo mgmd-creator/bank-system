@@ -47,7 +47,7 @@ public class BankService {
         account.deposit(amount);
     }
 
-    public void withdraw(String id, double amount) throws BankException, AccountNotFoundException {
+    public void withdraw(String id, double amount) throws BankException {
         Account account = findAccount(id);
         if (!(account instanceof WithdrawableAccount)) {
             throw new BankException("Этот счет не поддерживает снятие средств");
