@@ -36,7 +36,7 @@ public class DebitAccount implements Account, WithdrawableAccount {
         if (amount <= 0) throw new IllegalArgumentException("Сумма должна быть больше 0");
 
         this.balance += amount;
-        operations.add(new Operation(amount, Operation.Type.DEPOSIT)); // Записываем операцию
+        operations.add(new Operation(amount, Operation.Type.DEPOSIT));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class DebitAccount implements Account, WithdrawableAccount {
         }
 
         this.balance -= amount;
-        operations.add(new Operation(amount, Operation.Type.WITHDRAW)); // Записываем операцию
+        operations.add(new Operation(amount, Operation.Type.WITHDRAW));
     }
 
     @Override

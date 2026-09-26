@@ -11,7 +11,7 @@ public class CreditAccount implements Account, WithdrawableAccount {
     private double balance;
     private final double creditLimit;
     private boolean active;
-    private final List<Operation> operations = new ArrayList<>(); // История операций
+    private final List<Operation> operations = new ArrayList<>();
 
     public CreditAccount(String id, double initialBalance, double creditLimit) {
         if (initialBalance < 0 || creditLimit < 0) {
