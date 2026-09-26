@@ -4,7 +4,7 @@ import com.bank.exception.AccountClosedException;
 import com.bank.exception.AccountNotFoundException;
 import com.bank.exception.BankException;
 import com.bank.model.*;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +29,8 @@ public class BankService {
         addAccount(account);
     }
 
-    public void createDepositAccount(String id, double balance) {
-        DepositAccount account = new DepositAccount(id, balance);
+    public void createDepositAccount(String id, double balance, LocalDate endDate) {
+        DepositAccount account = new DepositAccount(id, balance, endDate);
         addAccount(account);
     }
 
@@ -72,6 +72,20 @@ public class BankService {
 
         ((WithdrawableAccount) fromAccount).withdraw(amount);
         toAccount.deposit(amount);
+    }
+
+    public List<Operation> getAccountStatement(String id, java.time.LocalDateTime start, java.time.LocalDateTime end) throws BankException {
+        Account account = findAccount(id);
+
+        List<Operation> allOperations = account.getOperations();
+
+        List<Operation> filtered = new ArrayList<>();
+        for (Operation op : allOperations) {
+            if (!op.getDateTime().isBefore(start) && !op.getDateTime().isAfter(end)) {
+                filtered.add(op);
+            }
+        }
+        return filtered;
     }
 
     public List<Account> getAllAccounts() {

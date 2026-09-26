@@ -12,4 +12,6 @@ public interface Account {
 
     void deposit(double amount) throws AccountClosedException;
     void close() throws AccountClosedException;
+
+    java.util.List<Operation> getOperations();
 }
