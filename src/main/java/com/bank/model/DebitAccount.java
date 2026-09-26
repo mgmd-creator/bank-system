@@ -10,7 +10,7 @@ public class DebitAccount implements Account, WithdrawableAccount {
     private final String id;
     private double balance;
     private boolean active;
-    private final List<Operation> operations = new ArrayList<>(); // История операций
+    private final List<Operation> operations = new ArrayList<>();
 
     public DebitAccount(String id, double initialBalance) {
         if (initialBalance < 0) {
