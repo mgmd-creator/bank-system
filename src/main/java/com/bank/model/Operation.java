@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Operation {
     public enum Type {
-        DEPOSIT, WITHDRAW, TRANSFER_IN, TRANSFER_OUT
+        DEPOSIT, WITHDRAW
     }
 
     private final LocalDateTime dateTime;
@@ -19,14 +19,6 @@ public class Operation {
 
     public LocalDateTime getDateTime() {
         return dateTime;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public Type getType() {
-        return type;
     }
 
     @Override

@@ -79,10 +79,6 @@ public class DepositAccount implements Account, WithdrawableAccount {
         this.active = false;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
     public List<Operation> getOperations() {
         return operations;
     }

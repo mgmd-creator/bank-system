@@ -1,7 +1,6 @@
 package com.bank.model;
 
 import com.bank.exception.AccountClosedException;
-import com.bank.exception.InsufficientFundsException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
