@@ -21,18 +21,14 @@ class DepositAccountTest {
         LocalDate futureDate = LocalDate.now().plusMonths(6);
         DepositAccount account = new DepositAccount("1", 1000.0, futureDate);
 
-        assertThrows(IllegalStateException.class, () -> {
-            account.withdraw(100.0);
-        });
+        assertThrows(IllegalStateException.class, () -> account.withdraw(100.0));
     }
 
     @Test
     void testDepositClosedDepositAccount() throws Exception {
         DepositAccount account = new DepositAccount("1", 1000.0, LocalDate.now().plusMonths(1));
         account.close();
-        assertThrows(AccountClosedException.class, () -> {
-            account.deposit(100.0);
-        });
+        assertThrows(AccountClosedException.class, () -> account.deposit(100.0));
     }
 
     @Test
