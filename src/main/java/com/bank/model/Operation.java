@@ -24,18 +24,6 @@ public class Operation {
         return dateTime;
     }
 
-    public double getAmount() {
-        return amount;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public double getBalanceAfter() {
-        return balanceAfter;
-    }
-
     @Override
     public String toString() {
         return "[" + dateTime.toString().replace('T', ' ') + "] Вид: " + type +
