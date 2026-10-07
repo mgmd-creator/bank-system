@@ -47,8 +47,8 @@ public class DepositAccount implements Account, WithdrawableAccount {
         if (amount <= 0) {
             throw new IllegalArgumentException("Сумма пополнения должна быть больше 0");
         }
-        this.balance += amount;
-        operations.add(new Operation(amount, Operation.Type.DEPOSIT));
+        balance += amount;
+        operations.add(new Operation(amount, Operation.Type.DEPOSIT, balance));
     }
 
     @Override
@@ -67,8 +67,8 @@ public class DepositAccount implements Account, WithdrawableAccount {
         if (amount > balance) {
             throw new InsufficientFundsException("Недостаточно средств. Запрошено: " + amount + ", Доступно: " + balance);
         }
-        this.balance -= amount;
-        operations.add(new Operation(amount, Operation.Type.WITHDRAW));
+        balance -= amount;
+        operations.add(new Operation(amount, Operation.Type.WITHDRAW, balance));
     }
 
     @Override

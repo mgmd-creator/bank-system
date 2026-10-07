@@ -12,7 +12,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\n=== БАНКОВСКАЯ СИСТЕМА ===");
+            System.out.println("\n= БАНКОВСКАЯ СИСТЕМА =");
             System.out.println("1. Создать дебетовый счет");
             System.out.println("2. Создать кредитный счет");
             System.out.println("3. Создать депозитный счет");
@@ -116,8 +116,6 @@ public class Main {
                     case 9: {
                         System.out.print("Введите ID счета: ");
                         String id = scanner.next();
-
-                        // Для удобства запрашиваем количество дней выписки назад от сегодняшнего дня
                         System.out.print("За сколько последних дней сформировать выписку? Введите число: ");
                         int days = scanner.nextInt();
 
@@ -146,7 +144,7 @@ public class Main {
                     default:
                         System.out.println("Неверный пункт меню.");
                 }
-            } catch (BankException | IllegalArgumentException e) {
+            } catch (BankException | IllegalArgumentException | IllegalStateException e) {
                 System.out.println("Ошибка: " + e.getMessage());
             }
         }

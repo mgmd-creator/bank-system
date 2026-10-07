@@ -35,8 +35,8 @@ public class DebitAccount implements Account, WithdrawableAccount {
         if (!active) throw new AccountClosedException("Счет закрыт");
         if (amount <= 0) throw new IllegalArgumentException("Сумма должна быть больше 0");
 
-        this.balance += amount;
-        operations.add(new Operation(amount, Operation.Type.DEPOSIT));
+        balance += amount;
+        operations.add(new Operation(amount, Operation.Type.DEPOSIT, balance));
     }
 
     @Override
@@ -47,8 +47,8 @@ public class DebitAccount implements Account, WithdrawableAccount {
             throw new InsufficientFundsException("Недостаточно средств. Баланс: " + balance);
         }
 
-        this.balance -= amount;
-        operations.add(new Operation(amount, Operation.Type.WITHDRAW));
+        balance -= amount;
+        operations.add(new Operation(amount, Operation.Type.WITHDRAW, balance));
     }
 
     @Override
