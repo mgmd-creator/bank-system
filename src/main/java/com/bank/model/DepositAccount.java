@@ -60,7 +60,7 @@ public class DepositAccount implements Account, WithdrawableAccount {
             throw new IllegalArgumentException("Сумма снятия должна быть больше 0");
         }
 
-        if (LocalDate.now().isBefore(endDate)) {
+        if (LocalDate.now().isBefore(endDate)) { //если дата раньше чем дата окончания
             throw new IllegalStateException("Досрочное снятие запрещено! Вклад действует до " + endDate);
         }
 

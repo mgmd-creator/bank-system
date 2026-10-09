@@ -34,6 +34,11 @@ public class BankService {
         addAccount(account);
     }
 
+    public void closeAccount(String id) throws BankException {
+        Account account = findAccount(id);
+        account.close();
+    }
+
     public Account findAccount(String id) throws AccountNotFoundException {
         Account account = accounts.get(id);
         if (account == null) {

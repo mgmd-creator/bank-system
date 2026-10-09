@@ -22,6 +22,7 @@ public class Main {
             System.out.println("7. Проверить баланс счета");
             System.out.println("8. Показать список всех счетов");
             System.out.println("9. Получить выписку по счету за период");
+            System.out.println("10. Закрытие счета");
             System.out.println("0. Выход");
             System.out.print("Выберите пункт меню: ");
 
@@ -135,6 +136,13 @@ public class Main {
                             }
                         }
                         System.out.println("Текущий остаток на счете: " + acc.getBalance());
+                        break;
+                    }
+                    case 10: {
+                        System.out.print("Введите ID счета для закрытия: ");
+                        String id = scanner.next();
+                        bankService.closeAccount(id);
+                        System.out.println("Счет " + id + " успешно закрыт!");
                         break;
                     }
                     case 0: {
